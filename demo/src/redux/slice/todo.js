@@ -1,4 +1,4 @@
-import {createSlice,createAsyncThunk, isFulfilled, isRejected} from '@reduxjs/toolkit'
+import {createSlice,createAsyncThunk} from '@reduxjs/toolkit'
 
 export const fetchtodos= createAsyncThunk('fetchtodos',async()=>
 {
@@ -8,7 +8,7 @@ export const fetchtodos= createAsyncThunk('fetchtodos',async()=>
 
 const todoslice = createSlice({
 
-        name:todo,
+        name:'todo',
         initialState:
         {
             isLoading:false,
@@ -20,12 +20,12 @@ const todoslice = createSlice({
             {
                 state.isLoading=true;
             })
-            builder.addCase(fetchtodos,isFulfilled,(state,action)=>
+            builder.addCase(fetchtodos.fulfilled,(state,action)=>
             {
                 state.isLoading=false;
                 state.data=action.payload;
             })
-            builder.addCase(fetchtodos,isRejected,(state,action)=>
+            builder.addCase(fetchtodos.rejected,(state,action)=>
             {
                 state.isError=true;
             })
